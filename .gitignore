@@ -1,0 +1,46 @@
+# databases
+*.db
+
+# environments
+env.sh
+.DS_Store
+
+# sonar
+.scannerwork
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE
+.idea
+
+#venv
+venv/
+.venv/
+
+# Flask
+instance/
+.webassets-cache
+
+# unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+

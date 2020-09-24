@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% from "macros.html" import add_support_sidebar with context %}
+{% block content %}
+    <div class="row justify-content-start">
+        <div class="col-3">
+           {{ add_support_sidebar() }}
+        </div>
+        <div class="col">
+            <div class="accordion" id="myAccordion">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h2 class="mb-0">
+                            <button type="button" class="btn btn-link" data-toggle="collapse"
+                                    data-target="#collapseOne">1. What is this template?
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#myAccordion">
+                        <div class="card-body">
+                            <p>Blah blah </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo">
+                        <h2 class="mb-0">
+                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse"
+                                    data-target="#collapseTwo">2. How much does it cost to use?
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#myAccordion">
+                        <div class="card-body">
+                            <p>It is free.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h2 class="mb-0">
+                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse"
+                                    data-target="#collapseThree">3. Do you have a mobile version?
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#myAccordion">
+                        <div class="card-body">
+                            <p>There isn't a version for install via the Apple or Google App Stores. However, it is a PWA so you can install this application onto your mobile phone by:
+                            <ul>
+                            <li><strong>Android</strong> click the install button on the Welcome page. This will create a shortcut for the website on your phone and enable you to quick launch it without opening a browser.</li>
+                            <li><strong>Apple</strong> whilst using the website, click the Share button on Safari and you will have the option to share with the homescreen. This will create a shortcut directly onto your home screen so you can launch logmyexercise without opening a browser.</li>
+                        </ul></p>
+                        </div>
+                    </div>
+                </div>
+                                <div class="card">
+                    <div class="card-header" id="headingThree">
+                        <h2 class="mb-0">
+                            <button type="button" class="btn btn-link collapsed" data-toggle="collapse"
+                                    data-target="#collapseThree">4. Can I enhance?
+                            </button>
+                        </h2>
+                    </div>
+                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#myAccordion">
+                        <div class="card-body">
+                            <p>Yes please! go ahead, fork and make changes. PRs are welcome</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

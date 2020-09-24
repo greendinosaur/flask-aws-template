@@ -1,0 +1,45 @@
+{% macro nav_link(endpoint, name, link_id, icon) %}
+    {% if request.endpoint %}
+        {% if request.endpoint.endswith(endpoint) %}
+            <li class="nav-item active">
+                {% else %}
+            <li class="nav-item">
+        {% endif %}
+    {% else %}
+        <li class="nav-item">
+    {% endif %}
+<a id="{{ link_id }}" class="nav-link" href="{{ url_for(endpoint) }}">
+    {% if icon %}
+        <i class="{{ icon }} " aria-hidden=true>&nbsp;</i>
+    {% endif %}
+    {{ name }}
+</a></li>
+{% endmacro %}
+{% macro add_google_analytics(ga_code) %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_code }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+        gtag('config', '{{ ga_code }}');
+        {% if not current_user.is_anonymous %}
+            gtag('set', {'user_id': '{{ current_user.id }}'}); // Set the user ID using signed-in user_id.
+        {%  endif %}
+    </script>
+{% endmacro %}
+{% macro add_support_sidebar() %}
+    <nav id="sidebar" class="navbar">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a href="{{ url_for('support.faq') }}">FAQ</a></li>
+            <li class="nav-item"><a href="{{ url_for('support.contact_us') }}">Contact Us</a></li>
+            <li class="nav-item"><a href="{{ url_for('support.disclaimer') }}">Disclaimer</a></li>
+            <li class="nav-item"><a href="{{ url_for('support.privacy') }}">Privacy Policy</a></li>
+            <li class="nav-item"><a href="{{ url_for('support.cookies') }}">Use of Cookies</a></li>
+        </ul>
+    </nav>
+{% endmacro %}

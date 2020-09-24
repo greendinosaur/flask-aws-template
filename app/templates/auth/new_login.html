@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+    <div class="container">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in using Auth0</h1>
+        <p><a class="btn btn-primary btn-lg btn-login btn-block" id="register_link" href="{{ url_for('auth.oauth_authorize') }}">Please Login!</a></p>
+    </div>
+{% endblock %}

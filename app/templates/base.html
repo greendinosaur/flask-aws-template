@@ -1,0 +1,143 @@
+{% from "macros.html" import nav_link with context %}
+{% from "macros.html" import add_google_analytics with context %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% set code | get_os_env('GA_CODE') %}
+    {% endset %}
+    {{ add_google_analytics(code) }}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="og:title" content="Flask AWS Template is a starter template for building Flask apps for AWS"/>
+    <meta property="og:image" content="{{ url_for('static', filename='img/og-banner.jpg') }}"/>
+    <meta property="og:url" content="{{ url_for('main.welcome') }}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:description"
+          content="Use this template as a starter for your own Flask based products hosted on AWS"/>
+
+    <meta name="Description"
+          content="Use this template as a starter for your own Flask based products hosted on AWS">
+
+
+    <title>Flask AWS Template</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/general.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing_page.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+
+    <link rel="manifest" href="/static/manifest.json">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Flask AWS Template">
+    <link href="" rel="apple-touch-icon">
+
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/icons/flask-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ url_for('static', filename='img/icons/flask-icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='img/icons/flask-icon-180x180.png') }}">
+    <link rel="apple-touch-icon" sizes="167x167" href="{{ url_for('static', filename='img/icons/flask-icon-167x167.png') }}">
+
+    <meta name="theme-color" content="#8745a3"/>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
+
+    <script src="https://kit.fontawesome.com/e6fa600115.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/icons/favicon.ico') }}">
+
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a id="main" class="navbar-brand" href="{{ url_for('main.welcome') }}"> <img
+            src="{{ url_for('static', filename='img/icons/flask-icon-80x80.png') }}"
+            alt="logo">&nbsp;&nbsp;&nbsp;Flask AWS Template</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        {% if current_user.is_anonymous %}
+            <ul class="navbar-nav ml-auto">
+                {{ nav_link('main.view_about', 'About', 'about_link','') }}
+                {{ nav_link('support.contact_us', 'Contact Us', 'contact_us_link','fas fa-envelope') }}
+                {{ nav_link('auth.oauth_authorize', 'Login', 'login_link','') }}
+                {{ nav_link('auth.sign_up', 'Sign Up', 'register_link','') }}
+            </ul>
+        {% else %}
+            <ul class="navbar-nav ml-auto">
+                {{ nav_link('main.view_about', 'About', 'about_link','') }}
+                {{ nav_link('support.contact_us', 'Contact Us', 'contact_us_link','fas fa-envelope') }}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-user" aria-hidden="true"></i>&nbsp;{{ current_user.username }}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a id="profile_link" class="dropdown-item"
+                           href="{{ url_for('main.user') }}">Profile</a>
+                        <a id="logout_link" class="dropdown-item" href="{{ url_for('auth.logout_new') }}">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        {% endif %}
+    </div>
+</nav>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="container-fluid container-fluid-max">
+    {% block content %}{% endblock %}
+
+    <footer class="pt-3 my-md-4 pt-md-4 border-top">
+        <div class="row">
+            <div class="col-12 col-md">
+                <a href="{{ url_for('main.welcome') }}"><img class="mb-2 max-height:40px"
+                                                             src="{{ url_for('static', filename='img/icons/flask-icon-40x40.png') }}" alt="logo"></a>
+                <small class="d-block mb-3 text-muted">&copy; 2020</small>
+
+            </div>
+            <div class="col-6 col-md">
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="{{ url_for('main.welcome') }}">Home</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="{{ url_for('support.faq') }}">FAQ</a></li>
+                    <li><a class="text-muted" href="{{ url_for('support.contact_us') }}">Contact Us</a></li>
+                    <li><a class="text-muted" href="https://headwayapp.co/">Change Log</a></li>
+                </ul>
+            </div>
+            <div class="col-6 col-md">
+                <ul class="list-unstyled text-small">
+                    <li><a class="text-muted" href="{{ url_for('support.disclaimer') }}">Disclaimer</a></li>
+                    <li><a class="text-muted" href="{{ url_for('support.privacy') }}">Privacy</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

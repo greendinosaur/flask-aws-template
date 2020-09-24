@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <section id="home" class="d-flex align-items-center position-relative vh-100 cover hero welcome">
+        <div class="container-fluid container-fluid-max">
+            <div class="row">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <h1 class="text-white">Welcome!</h1>
+                    <h2 class="text-white">Flask AWS Template is here as a starting point for your own Flask based products.</h2>
+                    {% if current_user.is_anonymous %}
+                        <a href="{{ url_for('auth.sign_up') }}" class="btn btn-primary my-2">(Example) Sign Up For
+                            Free</a>
+                    {% endif %}
+                    <button id="butInstall" class="btn btn-primary" aria-label="Install" hidden>Add to Home Screen</button>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="features">
+        <div class="container-fluid container-fluid-max">
+            <div class="row text-center py-5">
+                <div class="col-12 pb-4">
+                    <h2 class="text-red">How it Works</h2>
+                </div>
+
+                <div class="col-12 col-sm-6 col-lg-4">
+                <span class="fa-stack fa-2x">
+                <i class="fas fa-circle fa-stack-2x text-red" aria-hidden="true"></i>
+                <i class="fas fa-check-double fa-stack-1x text-white" aria-hidden="true"></i>
+            </span>
+                    <h3 class="mt-3 text-red h4">Fork the repo</h3>
+                    <p>Fork this repo so you can see and edit the code</p>
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+                <span class="fa-stack fa-2x">
+                <i class="fas fa-circle fa-stack-2x text-red" aria-hidden="true"></i>
+                <i class="fas fa-redo-alt fa-stack-1x text-white" aria-hidden="true"></i>
+            </span>
+                    <h3 class="mt-3 text-red h4">Set-up some accounts</h3>
+                    <p>Create an AWS account for deployment to AWS, CircleCI for CI/CD, Auth0 for user authentication</p>
+
+                </div>
+                <div class="col-12 col-sm-6 col-lg-4">
+                <span class="fa-stack fa-2x">
+                <i class="fas fa-circle fa-stack-2x text-red" aria-hidden="true"></i>
+                <i class="fas fa-heart fa-stack-1x text-white" aria-hidden="true"></i>
+            </span>
+                    <h3 class="mt-3 text-red h4">Extend</h3>
+                    <p class="text-center">Extend it further so it better meets your needs
+                        </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="pricing" class="py-5">
+        <div class="container-fluid container-fluid-max">
+            <div class="row text-center py-5">
+                <div class="col-12">
+                    <h2 class="pb-3 text-red">Pricing</h2>
+                    <p>This template is open-source so anyone can use and extend it.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% if current_user.is_anonymous %}
+        <section id="sign-up" class="py-5 request-quote bg-lightblue">
+            <div class="container-fluid container-fluid-max">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-auto py-3 text-center">
+                        <h2 class="mb-0 text-red">Ready to create a user?</h2>
+                        <p class="mb-0 h4 text-red font-weight-normal"></p>
+                    </div>
+                    <div class="col-12 col-md-auto d-flex justify-content-center align-items-center">
+                        <a href="{{ url_for('auth.sign_up') }}" class="btn btn-primary my-2">(Example) Sign Up For
+                            Free</a>
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+    <script src="{{ url_for('static', filename='js/install.js') }}"></script>
+    <script>
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker
+                .register('./service-worker.js')
+                .then(function (registration) {
+                    console.log('Service Worker Registered!');
+                    return registration;
+                })
+                .catch(function (err) {
+                    console.error('Unable to register service worker.', err);
+                });
+        }
+
+    </script>
+
+
+{% endblock %}

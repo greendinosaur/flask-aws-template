@@ -1,0 +1,31 @@
+version: 1
+disable_existing_loggers: true
+
+formatters:
+  standard:
+    format: "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s"
+    datefmt: '%H:%M:%S'
+
+handlers:
+  console:  # handler which will log into stdout
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: standard  # Use formatter defined above
+    stream: ext://sys.stderr
+
+  file_handler: # handler which will log to file
+    class: logging.FileHandler
+    level: WARNING
+    filename: /tmp/logmyex.log
+    formatter: standard
+
+loggers:
+  development:
+    handlers: [console, file_handler]
+  test:
+    handlers: [file_handler]
+  production:
+    handlers: [file_handler]
+root:  # Loggers are organized in hierarchy - this is the root logger config
+  level: DEBUG
+  handlers: [file_handler]

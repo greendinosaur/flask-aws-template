@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col">
+            <h1 class="h3 mb-3 font-weight-normal">An unexpected error has occurred</h1>
+            <p>The administrator has been notified. Sorry for the inconvenience!</p>
+            <p><a href="{{ url_for('main.index') }}">Back</a></p>
+        </div>
+    </div>
+{% endblock %}

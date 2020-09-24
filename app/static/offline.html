@@ -1,0 +1,114 @@
+<!--
+ Many thanks to the PWA Codelab (https://g.co/codelabs/pwa) for helping make my app installable on a mobile device
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask AWS Template</title>
+    <link rel="manifest" href="/static/manifest.json">
+    <meta name="theme-color" content="#2F3BA2"/>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            color: #444;
+            font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        html {
+            overflow: hidden;
+        }
+
+        body {
+            align-content: stretch;
+            align-items: stretch;
+            background: #ececec;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+        }
+
+        img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .header {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background: #fff;
+            box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+            0 2px 9px 1px rgba(0, 0, 0, 0.12),
+            0 4px 2px -2px rgba(0, 0, 0, 0.2);
+            color: #000000;
+            font-size: 16px;
+            height: 100px;
+            padding: 0px 16px 0px 16px;
+            position: fixed;
+            transition: transform 0.233s cubic-bezier(0, 0, 0.21, 1) 0.1s;
+            width: 100%;
+            will-change: transform;
+            z-index: 1000;
+        }
+
+        .main {
+            overflow-x: hidden;
+            overflow-y: auto;
+            padding-top: 60px;
+            font-size: 16px;
+        }
+
+        .cat-card {
+            background: #fff;
+            border-radius: 2px;
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+            0 3px 1px -2px rgba(0, 0, 0, 0.2),
+            0 1px 5px 0 rgba(0, 0, 0, 0.12);
+            box-sizing: border-box;
+            margin: 16px;
+            padding: 16px;
+            position: relative;
+        }
+
+        .offline-cat {
+            display: block;
+            margin: 1.5em auto;
+        }
+
+    </style>
+</head>
+<body>
+<div class="header">
+
+    <img src="/static/img/icons/circle_profile_80.png" alt="Flask AWS Template" >
+    <div>
+        &nbsp;Flask AWS Template
+    </div>
+</div>
+<main class="main">
+    <div class="cat-card">
+        <img src="/static/img/no_internet.jpg" alt="No Internet" class="offline-cat">
+        <div>
+            You appear to be offline. Flask AWS Template requires an Internet connection
+        </div>
+    </div>
+</main>
+</body>
+</html>

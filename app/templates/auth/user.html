@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block content %}
+     {{ moment.include_moment(no_js=True) }}
+    {# Need to put the moment include back in once it supports forcing of https #}
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.28.0/moment-with-locales.min.js"
+            integrity="sha512-kcvf1mExE8WCOLBL5re/9hLUHfaj8+LQrKlupTarmme+rwv8asLK4q6Ge32trTMBElPBP5sll4czZKNvps0VvA=="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone.js"
+            integrity="sha256-dWmHGsnrX5SD7KolfPMFQCt8DoDmkrAONz+rCsChg9E=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.31/moment-timezone-with-data-2012-2022.min.js"
+            integrity="sha256-J3t/BAGqnl57qtjKVL6IipkuPjImp2hkXeiiwNYELLw=" crossorigin="anonymous"></script>
+    {{ moment.include_moment(no_js=True) }}
+    {# Need to put the moment include back in once it supports forcing of https #}
+
+    <h1 class="h3 mb-3 font-weight-normal">My profile</h1>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card text-center bg-light mb-3 border-light">
+                <div class="cardheader">
+                </div>
+                <div class="avatar">
+                    <img src="{{ user.avatar(128) }}" alt="avatar image">
+                </div>
+                <div class="title">
+                    {{ user.username }}
+                </div>
+                <div class="desc">
+                    {% if user.last_seen %}
+                        Last seen on: {{ moment(user.last_seen).format('ll') }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <h3 class="h3 mb-3 font-weight-normal">Contact Us</h3>
+                <p>We'd love to hear from you. Questions, jokes, feedback on the site, suggested improvements. All are
+                    welcome.</p>
+                <p>We read and respond to every inquiry. We really do want to hear from you!</p>
+                <p>Please fill in the form below</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 mx-auto box-shadow bg-light">
+                <form action="{{ form_url }}" method="post" name="hello" novalidate>
+                    {{ form.hidden_tag() }}
+                    <div class="form-group">
+                        {{ wtf.form_field(form.name, class="form-control") }}
+                        {% for error in form.name.errors %}
+                            <small class="form-text text-muted">[{{ error }}]</small>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ wtf.form_field(form.email, class="form-control") }}
+                        {% for error in form.email.errors %}
+                            <small class="form-text text-muted">[{{ error }}]</small>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ wtf.form_field(form.subject, class="form-control") }}
+                        {% for error in form.subject.errors %}
+                            <small class="form-text text-muted">[{{ error }}]</small>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        {{ wtf.form_field(form.message, class="form-control", rows=8) }}
+                        {% for error in form.message.errors %}
+                            <small class="form-text text-muted">[{{ error }}]</small>
+                        {% endfor %}
+                    </div>
+                    <button id="send_message" class="btn btn-lg btn-primary btn-block" type="submit">Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="row pt-2 my-md-2 pt-md-2">
+            <div class="col-md-8 mx-auto">
+                <p><i class="fa fa-twitter" aria-hidden="true"></i><a href="https://twitter.com/greendinosaur10">Twitter</a></p>
+            </div>
+        </div>
+{% endblock %}

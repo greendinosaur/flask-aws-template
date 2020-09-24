@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+      <div class="col">
+        <h1 class="h3 mb-3 font-weight-normal">The page you are looking for cannot be found.</h1>
+        <p><a href="{{ url_for('main.index') }}">Back</a></p>
+      </div>
+    </div>
+{% endblock %}

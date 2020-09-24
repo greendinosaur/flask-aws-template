@@ -1,0 +1,17 @@
+@media (max-width: 480px) {
+    .about {
+        background-image: url(../img/banners/rocks_500.jpeg);
+    }
+}
+
+@media (min-width: 481px) and (max-width: 1000px) {
+    .about {
+        background-image: url(../img/banners/rocks_1000.jpeg);
+    }
+}
+
+@media (min-width: 1001px)  {
+    .about {
+        background-image: url(../img/banners/rocks_1600.jpeg);
+    }
+}

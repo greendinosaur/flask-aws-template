@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section id="home" class="d-flex align-items-center position-relative vh-100 cover hero about">
+
+        <div class="container-fluid container-fluid-max">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <blockquote><h1 class="mb-0 text-white">Begin - to begin is half the work, let half still remain; again begin this, and thou wilt have finished.
+                    </h1>
+                        <footer class="blockquote-footer text-white">Marcus Aurelius</footer>
+                    </blockquote>
+                </div>
+            </div>
+    </section>
+
+    <section id="process" class="features">
+        <div class="container-fluid container-fluid-max">
+            <div class="row justify-content-md-center">
+                <div class="col col-md-8 mx-auto">
+                    <h1 class="text-center pb-3">About</h1>
+                    <p class="text-center pb-3">
+                        Life is too short to re-invent the wheel. We just want to crack on and build great products.
+                    </p>
+                    <hr class="ml-5 mr-5"/>
+                    <p class="text-center pb-3">
+                        But there is so much to do in addition to the code.
+                    </p>
+                    <hr class="ml-5 mr-5"/>
+                    <p class="text-center pb-3">
+                        This is why this template was put together. To make your life (a little) easier by showing you how to write a Python Flask application.
+                    </p>
+                    <hr class="ml-5 mr-5"/>
+                    <p class="text-center pb-3">
+                        It can be easily deployed onto AWS.
+                    </p>
+                    <hr class="ml-5 mr-5"/>
+                    <p class="text-center pb-3">
+                        And is free to all.
+                    </p>
+                    <hr class="ml-5 mr-5"/>
+                    <p class="text-center pb-3">
+                        So enjoy.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {% if current_user.is_anonymous %}
+        <section id="sign-up" class="py-5 request-quote bg-lightblue">
+            <div class="container-fluid container-fluid-max">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-auto py-3 text-center">
+                        <h2 class="mb-0 text-red">Ready to create an account?</h2>
+                        <p class="mb-0 h4 text-red font-weight-normal"></p>
+                    </div>
+                    <div class="col-12 col-md-auto d-flex justify-content-center align-items-center">
+                         <a href="{{ url_for('auth.sign_up') }}" class="btn btn-primary my-2">Sign Up For
+                            Free</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+{% endblock %}

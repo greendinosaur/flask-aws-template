@@ -1,0 +1,116 @@
+version: 2.1
+jobs:
+  build-and-test:
+    docker:
+      - image: circleci/python:3.7.7-stretch-browsers
+        environment:
+          FLASK_CONFIG: testing
+          AUTH0_CLIENT_ID: 123
+          AUTH0_CLIENT_SECRET: secret
+          AUTH0_CLIENT_DOMAIN: domain
+          CONTACT_US_FORMAT:
+          TEST_DATABASE_URL: mysql+pymysql://root:ubuntu@localhost/circle_test?charset=utf8mb4
+      - image: circleci/mysql:5.7.26
+        environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: true
+          MYSQL_ROOT_PASSWORD: ubuntu
+          MYSQL_DATABASE: circle_test
+          MYSQL_USER: root
+        command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+    steps:
+      - checkout
+      - run: mkdir test-reports
+      - run:
+          name: Download Selenium
+          command: |
+            curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
+      - run:
+          name: "Update Node.js and npm"
+          command: |
+            curl -sSL "https://nodejs.org/dist/v12.18.3/node-v12.18.3-linux-x64.tar.xz" | sudo tar --strip-components=2 -xJ -C /usr/local/bin/ node-v12.18.3-linux-x64/bin/node
+            curl https://www.npmjs.com/install.sh | sudo bash
+      - run:
+          name: Check current version of node
+          command: node -v
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+      - run:
+          name: Waiting for MySQL to be ready
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
+      - run:
+          name: Install Python deps in a venv
+          command: |
+            python3 -m venv venv
+            source venv/bin/activate
+            pip install -U pip
+            pip install -r requirements.txt
+      - run:
+          name: run tests and calculate coverage
+          command: |
+            source venv/bin/activate
+            coverage run -m pytest --junitxml="test-reports/results.xml"
+            coverage xml
+      - sonarcloud/scan
+      - store_test_results:
+          path: test-reports
+      - store_artifacts:
+          path: .coverage
+      - store_artifacts:
+          path: coverage.xml
+      - store_artifacts:
+          path: test-reports/results.xml
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - "venv"
+  deploy:
+    docker:
+      - image: circleci/python:3.7.7
+    steps:
+      - checkout
+      - run:
+          name: installing aws dependencies
+          command: |
+            sudo pip install --upgrade setuptools
+            sudo pip install awsebcli --upgrade
+      - run:
+          name: deploying
+          command: |
+            echo $BEANSTALK_APPLICATION_NAME
+            eb init --platform 'Python 3.7 running on 64bit Amazon Linux 2' --region 'us-east-2' $BEANSTALK_APPLICATION_NAME
+            eb use $BEANSTALK_ENVIRONMENT_NAME
+            eb deploy $BEANSTALK_ENVIRONMENT_NAME --message $CIRCLE_BUILD_NUM
+      - aws-s3/sync:
+          from: app/static
+          overwrite: true
+          to: $AWS_S3_BUCKET/static
+
+orbs:
+  sonarcloud: sonarsource/sonarcloud@1.0.1
+  aws-s3: circleci/aws-s3@1.0.16
+
+workflows:
+  main:
+    jobs:
+      - build-and-test:
+          context: sonarcloud
+      - hold:
+          type: approval
+          requires:
+            - build-and-test
+          filters:
+            branches:
+              only:
+                - master
+      - deploy:
+          context: aws
+          requires:
+            - hold
+

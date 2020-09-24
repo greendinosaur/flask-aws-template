@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+
+    app:
+      build: .
+      links:
+        - db
+      ports:
+        - "5000:5000"
+      environment:
+        - FLASK_CONFIG=development
+        - AUTH0_CLIENT_DOMAIN
+        - AUTH0_CLIENT_ID
+        - AUTH0_CLIENT_SECRET
+        - CONTACT_US_FORMAT
+        - S3_BUCKET
+        - GA_CODE
+        - CDN_DOMAIN
+        - DEV_DATABASE_URL=mysql+pymysql://root:hello@db/demo?charset=utf8mb4
+      depends_on:
+        - db
+
+    db:
+      image: mysql:5.7.26
+      environment:
+        MYSQL_ROOT_PASSWORD: hello
+        MYSQL_DATABASE: demo
+      ports:
+        - "3308:3306"
+      command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']

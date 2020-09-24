@@ -1,0 +1,2 @@
+Sitemap: <YOUR_URL>/sitemap.xml
+
