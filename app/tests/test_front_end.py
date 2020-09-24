@@ -43,7 +43,6 @@ class TestBase(LiveServerTestCase):
         self.driver.find_element_by_id("password").send_keys(
             test_user_password)
         self.driver.find_element_by_id("submit").click()
-        self.driver.find_element_by_id("set_up").click()
 
 
 class TestLogin(TestBase):
@@ -60,11 +59,6 @@ class TestLogin(TestBase):
         username_navbar = self.driver.find_element_by_id(
             "navbarDropdownMenuLink").text
         assert test_user_username in username_navbar
-
-        # no activities should be shown
-        no_activity_msg = self.driver.find_element_by_id("no_reg").text
-        assert "No regular activities" in no_activity_msg
-
 
 
 class TestContactUs(TestBase):
