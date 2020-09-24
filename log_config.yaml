@@ -16,7 +16,7 @@ handlers:
   file_handler: # handler which will log to file
     class: logging.FileHandler
     level: WARNING
-    filename: /tmp/logmyex.log
+    filename: /tmp/my_app.log
     formatter: standard
 
 loggers:

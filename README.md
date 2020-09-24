@@ -94,7 +94,12 @@ Some environment variables are required to launch the app
 export FLASK_APP=my_app
 ```
 
-### Step 5 - set-up a database
+### Step 5 - Set-up the Flask logger
+The logging configuration file [log_config.yaml](log_config.yaml) contains the configuration for the logger. 
+
+It logs messages to a log file contained at `/tmp/my_app.log`. This may not be suitable for your environment so change the value in this file.
+
+### Step 6 - set-up a database
 
 A database is required. It will default to sqlite which is installed by default on many OS's.
 Once you have a database, update the connection string. Otherwise, it will default to a local sqlite one which is fine for development.
@@ -103,7 +108,7 @@ Once you have a database, update the connection string. Otherwise, it will defau
 export DEV_DATABASE_URL=<YOUR DATABASE CONNECTION STRING>
 ```
 
-### Step 6 - initialise the database
+### Step 7 - initialise the database
 
 SQLAlchemy and Alembic are used to initialise the database
 
@@ -111,7 +116,7 @@ SQLAlchemy and Alembic are used to initialise the database
 flask db upgrade
 ```
 
-### Step 7 - Launch the app
+### Step 8 - Launch the app
 
 You can now run the app
 
@@ -123,8 +128,8 @@ You should see a statement on the command line indicating the app is now ready a
 
 Open up a browser to `http://localhost:5000`. Click around. Not all functionality will be working just yet as you need to register with some providers
 
-### Step 8 - Set-up user authentication
-The app uses Auth0 as its user authentication provider. You need to register for a free account with Auth0. Follow the guidance here to not only set-up your free account but also configure your tenant.
+### Step 9 - Set-up user authentication
+The app uses [Auth0](https://auth0.com/) as its user authentication provider. You need to register for a free account with Auth0. Follow the guidance here to not only set-up your free account but also configure your tenant.
 
 The import data you require once you have registered and have a tenant is the CLIENT_ID, CLIENT_SECRET, CLIENT_DOMAIN. Flask needs these set-up as environment variables. Execute the following
 
@@ -135,9 +140,9 @@ export FLASK_CLIENT_DOMAIN=<YOUR_DOMAIN>
 ```
 If you restart the application with `flask run`, the sign-up, log-in and log-out links will now work.
 
-### Step 9 - (Optional) Set-up Google analytics
+### Step 10 - (Optional) Set-up Google analytics
 
-If you have a web-domain and wish to use google analytics for this Flask apo, then you will need to register with google. Follow their guidance here.
+If you have a web-domain and wish to use [Google Analytics](https://analytics.google.com/) for this Flask apo, then you will need to register with google. Follow their guidance here.
 
 Once you've done this, set-up the relevant environment variable
 
@@ -145,7 +150,7 @@ Once you've done this, set-up the relevant environment variable
 export GA_CODE=<YOUR_GOOGLE_TAG>
 ```
 
-### Step 10 - (Optional) Set-up an AWS S3 bucket to store feedback from the Contact Us page
+### Step 11 - (Optional) Set-up an AWS S3 bucket to store feedback from the Contact Us page
 
 To fully use the contact-us page, you will need an AWS S3 bucket. Once you have one
 
@@ -153,7 +158,7 @@ To fully use the contact-us page, you will need an AWS S3 bucket. Once you have 
 export S3_BUCKET
 ```
 
-### Step 11 - (Optional) Set-up a CDN to servce static content
+### Step 12 - (Optional) Set-up a CDN to servce static content
 
 If you'd like to use a CDN to serve the static content then register and set-this up. Once you have the URL for the CDN then you need to let Flask know.
 
@@ -203,7 +208,9 @@ You can also run various linters by entering `Make lint`. These will provide som
 ### CI/CD
 
 I've leveraged [CircleCI](https://circleci.com) for Continuous Integration and Continuous Deployment. Tests are automatically run the against a MySQL database. Builds on master are automatically deployed when all tests pass successfully. Check out the [config file](.circleci/config.yml)
+
 I've also used [SonarCloud](https://sonarcloud.io) to highlight code coverage and code quality issues.
+
 [Snyk](https://snyk.io) is used to scan the requirements.txt file for potential vulnerabilities.
 
 ## How to use?
