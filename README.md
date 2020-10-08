@@ -318,10 +318,10 @@ Take this code as is and alter to better suit your needs.
 * update the meta data in the [base template](app/templates/base.html) to better support your site
 
 ## Contribute
-Feedback and contributions are welcome. Checkout the [code of conduct](code-of-conduct.md) and [contributor guidelines](contributor.md).
+Feedback and contributions are welcome. Checkout the [code of conduct](code_of_conduct.md) and [contributor guidelines](contributing.md).
 
 ## To dos
-* Update this documentation to run the app in AWS
+* The [issue tracker](https://github.com/greendinosaur/flask-aws-template/issues) contains the proposed enhancements and bug fixes.
 
 # License
 This is licensed under a MIT licence.
