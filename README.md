@@ -1,9 +1,13 @@
 # flask-aws-template
 This application showcases a bare-bones Flask application that can be easily deployed to AWS Elastic Beanstalk.
-The application is a fully responsive PWA website with some useful features that many applications require e.g. user authentication, logging etc.
+The application is a fully responsive PWA website with some useful features that many applications require e.g. user authentication, logging, privacy statements etc.
 
 # Motivation
 I started to build a Flask based responsive website to run on AWS. I spent a lot of time searching for the best way to run a fully responsive PWA website built in Flask running on AWS. I could not find a complete working example to use as a starting point. I've decided to create this repo to showcase the way I did this so others can benefit from my learning.
+
+I also spent a lot of time building some of the "compliance/hygiene" type pages like Contact Us, Privacy Policy etc. that every website requires. I thought it would be useful to have a working Flask application that has these plumbed in and ready for enhancements. This means less time on those type of features and more on the value-add product differentiators you really want to be working on.
+
+Another motivation is I believe in using SaaS services and not re-inventing the wheel especially when it comes to super-sensitive topics like User Authentication and Sign-Up. There is no need to be building yet-another-authentication piece of code when you can trust companies like Auth0 to do this. Far better to plug into SaaS offerings like Auth0 that provide commodity services so you can once again focus on the value-adds.
 
 # Status
 The application is fully working.
