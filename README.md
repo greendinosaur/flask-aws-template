@@ -11,7 +11,7 @@ Another motivation is I believe in using SaaS services and not re-inventing the 
 
 Furthermore, it's not only features that you need to care about. It's also SEO, tracking product analytics etc. This is why I've also added the use of Google Analytics tracking and various tags/best practice to assist with SEO so people actually find your site.
 
-And finally...... good engineering practices are a must. CI/CD and code quality are critical. Why spend ages trying to construct a pipeline that builds, tests and deploys the application when you can re-use an existing one. Learn how to use tools such as SonarCloud and Snyk to help improve your application. This sample app shows some of these tools in use.
+And finally...... good engineering practices are a must. CI/CD and code quality are critical. Why spend ages trying to construct a pipeline that builds, tests and deploys the application when you can re-use an existing one. Learn how to use tools such as CircleCI, SonarCloud and Snyk to help improve your application. This sample app shows some of these tools in use.
 
 # Status
 The application is fully working.
