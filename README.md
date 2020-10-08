@@ -16,8 +16,9 @@ And finally...... good engineering practices are a must. CI/CD and code quality 
 # Status
 The application is fully working.
 
-Check it out by forking the repo and running locally
+Check it out by forking the repo and running locally.
 
+Note that whilst I've beem building apps for AWS, this application will work on other cloud platforms of your choice. It has [Docker](Dockerfile) and [docker-compose](docker-compose.yml) files available that can be utilised to run on other platforms.
 
 # Technology
 It's built in Python leveraging the [Flask](https://flask.palletsprojects.com/en/1.1.x/#) framework. 
@@ -30,7 +31,7 @@ The front-end uses the [Bootstrap](https://getbootstrap.com/) framework in order
 
 The [Auth0](https://auth0.com/) website is used for authentication. I use the Python Authlib package to assist with the authentication.
 
-Google Analytics tracking is provided in all of the HTML pages.
+[Google Analytics tracking](https://marketingplatform.google.com/about/analytics/) is supported in all of the HTML pages.
 
 It is a fully [PWA compliant](https://web.dev/progressive-web-apps/) application so can be readily installed on Android and iOS devices. [Lighthouse](https://developers.google.com/web/tools/lighthouse/) in the Chrome DevTools has been used to test the compliance of the application.
 
