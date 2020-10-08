@@ -32,9 +32,9 @@ The [Auth0](https://auth0.com/) website is used for authentication. I use the Py
 
 Google Analytics tracking is provided in all of the HTML pages.
 
-It is a fully PWA compliant application so can be readily installed on Android and iOS devices.
+It is a fully [PWA compliant](https://web.dev/progressive-web-apps/) application so can be readily installed on Android and iOS devices. [Lighthouse](https://developers.google.com/web/tools/lighthouse/) in the Chrome DevTools has been used to test the compliance of the application.
 
-The requirements.txt file contains the dependent python packages that must be installed.
+The [requirements.txt](requirements.txt) file contains the dependent python packages to be installed.
 
 # Features
 
@@ -318,7 +318,7 @@ Take this code as is and alter to better suit your needs.
 * update the meta data in the [base template](app/templates/base.html) to better support your site
 
 ## Contribute
-Feedback and contributions are welcome. 
+Feedback and contributions are welcome. Checkout the [code of conduct](code-of-conduct.md) and [contributor guidelines](contributor.md).
 
 ## To dos
 * Update this documentation to run the app in AWS
