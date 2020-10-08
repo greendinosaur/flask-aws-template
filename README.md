@@ -9,6 +9,10 @@ I also spent a lot of time building some of the "compliance/hygiene" type pages 
 
 Another motivation is I believe in using SaaS services and not re-inventing the wheel especially when it comes to super-sensitive topics like User Authentication and Sign-Up. There is no need to be building yet-another-authentication piece of code when you can trust companies like Auth0 to do this. Far better to plug into SaaS offerings like Auth0 that provide commodity services so you can once again focus on the value-adds.
 
+Furthermore, it's not only features that you need to care about. It's also SEO, tracking product analytics etc. This is why I've also added the use of Google Analytics tracking and various tags/best practice to assist with SEO so people actually find your site.
+
+And finally...... good engineering practices are a must. CI/CD and code quality are critical. Why spend ages trying to construct a pipeline that builds, tests and deploys the application when you can re-use an existing one. Learn how to use tools such as SonarCloud and Snyk to help improve your application. This sample app shows some of these tools in use.
+
 # Status
 The application is fully working.
 
@@ -25,7 +29,6 @@ The front-end uses the [Bootstrap](https://getbootstrap.com/) framework in order
 [FontAwesome](https://fontawesome.com) is also used to provide icons.
 
 The [Auth0](https://auth0.com/) website is used for authentication. I use the Python Authlib package to assist with the authentication.
-Strava APIs are used for integration with [Strava](https://www.strava.com).
 
 Google Analytics tracking is provided in all of the HTML pages.
 
@@ -42,7 +45,7 @@ This app contains the following features:
 * Contact Us page showcasing how to use AWS S3 to store the user submitted data
 * Sign-up/Log-in/Log-out using Auth0 as the authentication provider
 * A fully responsive PWA application that runs as well on the desktop as it does on a mobile device
-* Database access via SQLAlchemy
+* Database access via SQLAlchemy so agnostic to underlying database used
 * Google analytics
 * Use of a Content Distribution Network (CDN) to serve the static content
 * Pages contain the metadata required by search engines
