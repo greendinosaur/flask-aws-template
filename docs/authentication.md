@@ -66,7 +66,7 @@ The application will be available at http://127.0.0.1
 
 Click on the Sign-Up button. If it's all been configured correctly, then you should see the Auth0 sign-up screen. Register for an account and you will be taken to the home page of the Flask application.
 
-** How does the Flask app work
+## How does the Flask app work
 
  Under the hood, the Flask application uses something called OAuth to communicate with Auth0 and authenticate the user.
  
@@ -100,6 +100,6 @@ Click on the Sign-Up button. If it's all been configured correctly, then you sho
  
  To avoid accessing Auth0 when testing the app locally, there are simple `login` and `logout` views. You'll see that these aren't added to the list of views automatically via the `@bp.route` decorator. The reason for this is to not expose these views in a staging or production environment when we want users to login via Auth0. 
  
- Inside the packages [__init__.py](../app/main/__init__.py) file is a piece of code that only adds these to the list of Flask routes if the `FLASK_ENV` variable is configured to `development` or `testing`.
+ Inside the packages [__init__.py](../app/auth/__init__.py) file is a piece of code that only adds these to the list of Flask routes if the `FLASK_ENV` variable is configured to `development` or `testing`.
  
  
