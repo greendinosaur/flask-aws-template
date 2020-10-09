@@ -9,28 +9,86 @@ To do this:
 * Register for an AWS account if you haven't done so already
 * If you're unfamiliar with Elastic Beanstalk, read the [documentation] (https://docs.aws.amazon.com/elastic-beanstalk/index.html)
 
-### Create an Application
+### Install the EB CLI
 
-An application must be created. Follow the [AWS instructions](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/applications.html) to create a new application.
+The AWS CLI makes it easy to manage deployments and environment creation via the command line. Follow the [instructions](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install-advanced.html) to install it via pip.
 
-Once an application is created, you will be guided to create an environment to host and run the application.
+### Using the EB CLI to create and deploy a new application
 
-### Create an Environment
+Once installed, you need to configure your application and environment. 
 
-The [AWS Documents](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features.environments.html) cover the creation of a new environment via the AWS Management console.
+Inside the flask-aws-template folder that contains the code, execute:
 
-Remember to select a Web Server Environment and in the Platform options, Managed platform, Python as the Platform and Python 3.7 running on 64bit Amazon Linux 2 as the branch. Leave the Platform version as the Recommended version. You can leave other options at the defaults.
+```commandline
+eb init
+```
 
-To get going, it's best to deploy the sample application provided by AWS so you can check the application and environment is working. 
+Follow the prompts to fully set up the EB CLI and to define the application.
+0. If you have not used AWS Command Line tools before, you will likely be asked for a username and password. For now, easiest to use the one used to register with AWS. 
+1. Choose a suitable region where the application will be hosted
+2. Choose an application name. The defualt is fine.
+3. If it asks you about using Docker, say n
+4. Choose Python as the platform
+5. Choose Python 3.7 with Amazon Linux 2 as the runtime. This should be the default option.
+6. Choose n to using code commit
+7. Choose n to using SSH
 
+You can now create your first environment: Enter
 
-### Test the environment
+```commandline
+eb init
+```
 
-Once the environment is created, you will see the name of the environment and its URL. Click on the URL and you will see the default application installed by AWS.
+Follow the prompts and answer as:
+1. Say y to  the default environment name
+2. Say y to the default prefix
+3. Say y to the default load balancer (Application)
+4. Say n to Spot Fleet
+
+After answering these prompts, it will go about creating your environment. This will take a number of minutes.
+
+As part of the initial environment creation, it will also deploy your code from your git repo. It will deploy the latest code on the master branch.
+
+The final message on success will be something like `Successfully launched environment xxx` where xxx is the name of the environment.
+
+Make a note of the security group listed on the line `Created security group named: xxxx` as you will require this security group in order to access the RDS database. See the later section for information on this.
+
+To check all is okay, enter:
+
+```commandline
+eb health
+```
+
+This will show the health of the new environment. All being well, it will show a Status of Ready and a Health of Green.
+
+Make a note of the `CNAME` of your application. This will be required if you set-up Auth0 as the authentication mechanism for your application.
+
+Execute the following command to launch the URL for the environment in your default browser
+
+```commandline
+eb open
+```
+
+You should now see the default Flask app running successfully 😃 As the necessary environment variables to use Auth0 have not been set-up, you will not be able to login or register a new account just yet.
+
+### Configure the application to use Auth0
+
+Follow the guidance inside the [Introduction to Auth0](authentication.md) to create an Auth0 account. 
+
+When you configure your application on the Auth0 website, make sure you add the CNAME of your Elastic Beanstalk environment to the callback URLs. You can do this in addition to the 127.0.0.1 as multiple callback domains are allowed.
+
+### Deploying application changes to Elastic Beanstalk
+You can deploy the application to Elastic Beanstalk using the EB CLI. By default, it deploys the latest version on the master branch.
+
+Use the following to deploy changes. This will deploy to the environment created previously and restart it so the code changes take effect.
+
+ ```commandline
+eb deploy
+```
 
 ## Set-up the database
 
-Now you need to create a database. I recommend you do this separately and not as part of the Elastic Beankstalk environment. It's a more realistic scenario to have a separate database especially if you're running the application in Production. This [article](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-rds.html) has information on RDS databases and Elastic Beankstalk.
+Now you need to create a database. I recommend you do this separately and not as part of the Elastic Beanstalk environment. It's a more realistic scenario to have a separate database especially if you're running the application in Production. This [article](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/create-deploy-python-rds.html) has information on RDS databases and Elastic Beankstalk.
 
 To create the database, go to the RDS services. You can then create a database.
 
@@ -54,37 +112,3 @@ Follow the guidance on this [AWS page](https://docs.aws.amazon.com/elasticbeanst
 
 You should also add the IP address of your local machine to this security group and enable All traffic. This will allow you to connect to the database directly. This is useful to query the database and to run database migrations via the Flask-Migrate utility.
 
-## Install the EB CLI
-
-The AWS CLI makes it easy to manage deployments and environment creation via the command line. Follow the [instructions](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install-advanced.html) to install it via pip.
-
-## Configure EB CLI for Elastic Beanstalk
-
-Once installed, you need to configure it before you can use it. Inside the flask-aws-template folder, execute:
-
-```commandline
-eb init
-```
-
-Follow the prompts to fully set up the EB CLI. 
-* Choose the same region where you created the application and environment
-* select the application and environment when prompted
-
-Once you've set it up, check it's working by executing the following command to list all the environments for the application
-
-```commandline
-eb list
-```
-
-You can also execute the following command to launch the URL for the environment in your default browser
-
-```commandline
-eb open
-```
-
-## Deploying the application to Elastic Beanstalk
-You can now deploy the application to Elastic Beanstalk using the EB CLI.
-
- ```commandline
-eb deploy
-```
