@@ -213,7 +213,7 @@ CircleCI is used to automatically deploy the application to Elastic Beanstalk an
 ## Tests and CI/CD
 
 ### Tests
-The tests folder contains all of the application tests.
+The [tests](app/tests) folder contains all of the application tests.
 Selenium is used in headless mode to test the UI. [Chromedriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) will need to be installed.
 
 To run the tests execute `Make test` on the command line.
@@ -221,7 +221,9 @@ You can also run various linters by entering `Make lint`. These will provide som
 
 ### CI/CD
 
-I've leveraged [CircleCI](https://circleci.com) for Continuous Integration and Continuous Deployment. Tests are automatically run the against a MySQL database. Builds on master are automatically deployed when all tests pass successfully. Check out the [config file](.circleci/config.yml)
+I've leveraged [CircleCI](https://circleci.com) for Continuous Integration and Continuous Deployment. Tests are automatically run the against a MySQL database. Builds on master are automatically deployed when all tests pass successfully. 
+
+Check out the [config file](.circleci/config.yml) and the [CircleCI overview](docs/cicdwithcircleci.md) for further details on using CircleCI.
 
 I've also used [SonarCloud](https://sonarcloud.io) to highlight code coverage and code quality issues.
 
