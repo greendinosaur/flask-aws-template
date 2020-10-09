@@ -9,9 +9,9 @@ class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # details provided by Auth0 following registration of an app
-    AUTH0_CLIENT_ID = os.environ.get('AUTH0_CLIENT_ID')
-    AUTH0_CLIENT_SECRET = os.environ.get('AUTH0_CLIENT_SECRET')
-    AUTH0_CLIENT_DOMAIN = os.environ.get('AUTH0_CLIENT_DOMAIN')
+    AUTH0_CLIENT_ID = os.environ.get('AUTH0_CLIENT_ID') or ''
+    AUTH0_CLIENT_SECRET = os.environ.get('AUTH0_CLIENT_SECRET') or ''
+    AUTH0_CLIENT_DOMAIN = os.environ.get('AUTH0_CLIENT_DOMAIN') or ''
 
     LOGGING_CONFIG = "development"
 
