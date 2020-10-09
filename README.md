@@ -142,9 +142,9 @@ The app uses [Auth0](https://auth0.com/) as its user authentication provider. Yo
 The important data required, once you have registered and have a tenant, is the CLIENT_ID, CLIENT_SECRET, CLIENT_DOMAIN. Flask needs these set-up as environment variables. Execute the following
 
 ```commandline
-export FLASK_CLIENT_ID=<YOUR_CLIENT_ID>
-export FLASK_SECRET_ID=<YOUR_SECRET_ID>
-export FLASK_CLIENT_DOMAIN=<YOUR_DOMAIN>
+export AUTH0_CLIENT_ID=<YOUR_CLIENT_ID>
+export AUTH0_SECRET_ID=<YOUR_SECRET_ID>
+export AUTH0_CLIENT_DOMAIN=<YOUR_DOMAIN>
 ```
 If you restart the application with `flask run`, the sign-up, log-in and log-out links will now work.
 

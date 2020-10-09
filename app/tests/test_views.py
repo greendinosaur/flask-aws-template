@@ -23,11 +23,6 @@ def test_logout_view(test_client):
     assert response.status_code == 302
 
 
-def test_login_new_view(test_client):
-    response = test_client.get('/auth/login_new')
-    assert response.status_code == 200
-
-
 def test_logout_new_view(test_client):
     response = test_client.get('/auth/logout_new')
     assert response.status_code == 302

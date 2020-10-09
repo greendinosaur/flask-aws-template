@@ -117,16 +117,6 @@ def oauth_callback():
     return redirect(url_for(INDEX_PAGE))
 
 
-@bp.route('login_new')
-def login_new():
-    """
-    serves the login page that directs the user to auth0 for login
-    :return:
-    :rtype:
-    """
-    return render_template('auth/new_login.html', title='New Sign In')
-
-
 @bp.route('logout_new')
 def logout_new():
     """
