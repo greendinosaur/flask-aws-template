@@ -57,6 +57,7 @@ jobs:
             source venv/bin/activate
             coverage run -m pytest --junitxml="test-reports/results.xml"
             coverage xml
+      - sonarcloud/scan
       - store_test_results:
           path: test-reports
       - store_artifacts:
