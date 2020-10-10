@@ -231,7 +231,7 @@ This application will readily run in AWS and, as a bonus, on the free tier. I've
 
 CircleCI is used to automatically deploy the application to Elastic Beanstalk and the static files to S3.
 
-[Running on AWS](/wiki/Running-the-Flask-app-on-AWS) describes the AWS set-up required to run the Flask app on the AWS Elastic Beanstalk PaaS.
+[Running on AWS](https://github.com/greendinosaur/flask-aws-template/wiki/Running-the-Flask-app-on-AWS) describes the AWS set-up required to run the Flask app on the AWS Elastic Beanstalk PaaS.
 
 It can be deployed to other cloud providers as it is a simple Flask app. 
 
@@ -268,11 +268,11 @@ The [Lighthouse](https://developers.google.com/web/tools/lighthouse/) component 
 
 I've leveraged [CircleCI](https://circleci.com) for Continuous Integration and Continuous Deployment. Tests are automatically run the against a MySQL database. Builds on master are automatically deployed when all tests pass successfully. 
 
-Check out the [config file](.circleci/config.yml) and the [CircleCI overview](wiki/Running-the-Flask-app-on-AWS) for further details on using CircleCI.
+Check out the [config file](.circleci/config.yml) and the [CircleCI overview](https://github.com/greendinosaur/flask-aws-template/wiki/Running-the-Flask-app-on-AWS) for further details on using CircleCI.
 
 ## Further information
 
-Take a look at the project [wiki](wiki) for further guidance on using this template as a starting point for your own Flask based applications.
+Take a look at the project [wiki](https://github.com/greendinosaur/flask-aws-template/wiki) for further guidance on using this template as a starting point for your own Flask based applications.
 
 ## How to customize?
 
