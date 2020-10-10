@@ -231,7 +231,7 @@ This application will readily run in AWS and, as a bonus, on the free tier. I've
 
 CircleCI is used to automatically deploy the application to Elastic Beanstalk and the static files to S3.
 
-[Running on AWS](../wiki/Running-the-Flask-app-on-AWS) describes the AWS set-up required to run the Flask app on the AWS Elastic Beanstalk PaaS.
+[Running on AWS](/wiki/Running-the-Flask-app-on-AWS) describes the AWS set-up required to run the Flask app on the AWS Elastic Beanstalk PaaS.
 
 It can be deployed to other cloud providers as it is a simple Flask app. 
 
