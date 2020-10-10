@@ -76,6 +76,14 @@ This repo has been marked as a template. This means you can easily create your o
 
 Click [generate](https://github.com/greendinosaur/flask-aws-template/generate) to generate your own copy of this repo.
 
+Once you've generated your own copy of the repo, you will need to clone this repo onto your local machine.
+
+Inside the directory where you wish to store the code enter:
+
+```commandline
+git clone=<yourrepo>
+```
+
 ### Step 3 - install the dependencies in a virtual environment
 
 Change directories into the directory containing your copy of the source code.
@@ -138,7 +146,7 @@ flask run
 
 You should see a statement on the command line indicating the app is now ready at localhost:5000
 
-Open up a browser to [http://localhost:5000](http://localhost:5000]. Click around. Not all functionality will be working just yet as you need to register with some providers
+Open up a browser to [http://localhost:5000](http://localhost:5000). Click around. Not all functionality will be working just yet as you need to register with some providers
 
 ### Step 9 - (Optional) Set-up user authentication
 The app uses [Auth0](https://auth0.com/) as its user authentication provider. You need to register for a free account with Auth0. Follow the guidance here to not only set-up your free account but also configure your tenant.
@@ -156,7 +164,7 @@ If you restart the application with `flask run`, the sign-up, log-in and log-out
 
 ### Step 10 - (Optional) Set-up Google analytics
 
-If you have a web-domain and wish to use [Google Analytics](https://analytics.google.com/) for this Flask apo, then you will need to register with google. Follow their guidance here.
+If you have a web-domain and wish to use [Google Analytics](https://analytics.google.com/) for this Flask app, then you will need to register with Google. Follow the guidance on the [Google Analytics](https://analytics.google.com/) site.
 
 Once you've done this, set-up the relevant environment variable
 
