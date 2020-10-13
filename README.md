@@ -1,11 +1,16 @@
 # flask-aws-template
-This application showcases a bare-bones Flask application that can be easily deployed to AWS Elastic Beanstalk.
-The application is a fully responsive PWA website with some useful features that many applications require e.g. user authentication, logging, privacy statements etc.
+This application showcases a fully responsive PWA website with some useful features that many applications require e.g. user authentication, logging, privacy statements, SEO ready etc.
+
+It's built entirely in Python and Flask. It runs easily on AWS: guidance on installing on AWS Elastic Beanstalk is provided.
+
+It will also run on other cloud providers.
+
+It's been designed as a template so you can take a copy of this repo and customize to your requirements.
 
 # Motivation
-I started to build a Flask based responsive website to run on AWS. I spent a lot of time searching for the best way to run a fully responsive PWA website built in Flask running on AWS. I could not find a complete working example to use as a starting point. I've decided to create this repo to showcase the way I did this so others can benefit from my learning.
+I started to build a Flask based responsive website. I spent a lot of time searching for the best way to run a fully responsive PWA website built in Flask running on AWS. I could not find a complete working example to use as a starting point. I've decided to create this repo to showcase the way I did this so others can benefit from my learning.
 
-I also spent a lot of time building some of the "compliance/hygiene" type pages like Contact Us, Privacy Policy etc. that every website requires. I thought it would be useful to have a working Flask application that has these plumbed in and ready for enhancements. This means less time on those type of features and more on the value-add product differentiators you really want to be working on.
+I also spent a lot of time building some of the "compliance/hygiene" type pages like Contact Us, Privacy Policy etc. that every website requires. I thought it would be useful to have a working Flask application that has these plumbed in and ready for customization. This means less time on those type of features and more on the value-add product differentiators you really want to be working on.
 
 Another motivation is I believe in using SaaS services and not re-inventing the wheel especially when it comes to super-sensitive topics like User Authentication and Sign-Up. There is no need to be building yet-another-authentication piece of code when you can trust companies like Auth0 to do this. Far better to plug into SaaS offerings like Auth0 that provide commodity services so you can once again focus on the value-adds.
 
@@ -16,9 +21,9 @@ And finally...... good engineering practices are a must. CI/CD and code quality 
 # Status
 The application is fully working.
 
-Check it out by forking the repo and running locally.
+Check it out by generating a copy of the repo and run it locally.
 
-Note that whilst I've beem building apps for AWS, this application will work on other cloud platforms of your choice. It has [Docker](Dockerfile) and [docker-compose](docker-compose.yml) files available that can be utilised to run on other platforms.
+Note that whilst this app runs on AWS, this application will work on other cloud platforms of your choice. It has [Docker](Dockerfile) and [docker-compose](docker-compose.yml) files available that can be utilised to run on other platforms.
 
 # Technology
 It's built in Python leveraging the [Flask](https://flask.palletsprojects.com/en/1.1.x/#) framework. 
@@ -40,14 +45,14 @@ The [requirements.txt](requirements.txt) file contains the dependent python pack
 # Features
 
 This app contains the following features:
-* Use of Bootstrap and FontAwesome to produce a fully responsive, good-looking website
+* Use of Bootstrap and FontAwesome to produce a fully responsive, good-looking website.
 * A homepage and navbar built from Bootstrap
 * Static pages required by many sites (FAQ, disclaimer, cookie policy, privacy policy)
 * Contact Us page showcasing how to use AWS S3 to store the user submitted data
 * Sign-up/Log-in/Log-out using Auth0 as the authentication provider
 * A fully responsive PWA application that runs as well on the desktop as it does on a mobile device
 * Database access via SQLAlchemy so agnostic to underlying database used
-* Google analytics
+* Incorporates Google analytics tracking
 * Use of a Content Distribution Network (CDN) to serve the static content
 * Pages contain the metadata required by search engines
 * Metadata files required for PWA applications (manifest.json, service-worker.js, offline.html)
@@ -61,56 +66,63 @@ It's a standard Flask app with a database backend. To install and run locally:
 
 ## Run locally (non-Docker)
 
-### Step 1 -  ensure Python is installed. 
+### Step 1 -  ensure Python and Pip are installed. 
 
-It's been tested with Python 3.7.7.
+It's been tested with Python 3.7.7. It should work with any versions of Python >= 3.7.
 
-### Step 2 - Fork this repo
+### Step 2 - Create your repo
 
-Fork this repo, enter the following on the command line in the folder where you wish the code to live
+This repo has been marked as a template. This means you can easily create your own copy as a starting point.
+
+Click [generate](https://github.com/greendinosaur/flask-aws-template/generate) to generate your own copy of this repo.
+
+Once you've generated your own copy of the repo, you will need to clone this repo onto your local machine.
+
+Inside the directory where you wish to store the code enter:
+
 ```commandline
-git clone <path to repo>
-```
-
-Now change into the directory
-```commandline
-cd flask-aws-template
+git clone=<yourrepo>
 ```
 
 ### Step 3 - install the dependencies in a virtual environment
 
-create the virtual environment
+Change directories into the directory containing your copy of the source code.
+
+You need to create a virtual environment inside this directory.
+
 ```commandline
 python -m venv .venv
 ```
 
-now activate the virtual environment
+now activate this virtual environment
 ```commandline
 source ./.venv/bin/activate
 ```
 
-install the requirements
+install the requirements into this virtual environment
 ```commandline
 pip install -r requirements.txt
 ```
 
 ### Step 4 - Set-up the initial environment variables
 
-Some environment variables are required to launch the app
+Two initial environment variables are required to launch the app
 
 ```commandline
 export FLASK_APP=my_app
+export FLASK_CONFIG=development
 ```
 
 ### Step 5 - Set-up the Flask logger
-The logging configuration file [log_config.yaml](log_config.yaml) contains the configuration for the logger. 
+The logging configuration file [log_config.yaml](log_config.yaml) contains the default configuration for the logger. 
 
-It logs messages to a log file contained at `/tmp/my_app.log`. This may not be suitable for your environment so change the value in this file.
+It logs messages to a log file called `my_app.log` at `/tmp/my_app.log`. This may not be suitable for your environment so change the value in this file.
 
 ### Step 6 - set-up a database
 
 A database is required. It will default to sqlite which is installed by default on many OS's.
-Once you have a database, update the connection string. Otherwise, it will default to a local sqlite one which is fine for development.
+
+If you have a database, update the environment variable that stores the connection string. Otherwise, it will default to a local sqlite one which is fine for development.
 
 ```commandline
 export DEV_DATABASE_URL=<YOUR DATABASE CONNECTION STRING>
@@ -118,7 +130,7 @@ export DEV_DATABASE_URL=<YOUR DATABASE CONNECTION STRING>
 
 ### Step 7 - initialise the database
 
-SQLAlchemy and Alembic are used to initialise the database
+If you have a database, use SQLALchemy and Alembic to set-up this database with the required tables.
 
 ```commandline
 flask db upgrade
@@ -134,14 +146,14 @@ flask run
 
 You should see a statement on the command line indicating the app is now ready at localhost:5000
 
-Open up a browser to `http://localhost:5000`. Click around. Not all functionality will be working just yet as you need to register with some providers
+Open up a browser to [http://localhost:5000](http://localhost:5000). Click around. Not all functionality will be working just yet as you need to register with some providers
 
-### Step 9 - Set-up user authentication
+### Step 9 - (Optional) Set-up user authentication
 The app uses [Auth0](https://auth0.com/) as its user authentication provider. You need to register for a free account with Auth0. Follow the guidance here to not only set-up your free account but also configure your tenant.
 
 The document [Authentication](docs/authentication.md) describes the Auth0 setup in further details along with an explanation of how the app has been coded to use Auth0.
 
-The important data required, once you have registered and have a tenant, is the CLIENT_ID, CLIENT_SECRET, CLIENT_DOMAIN. Flask needs these set-up as environment variables. Execute the following
+The important data required, once you have registered and have a tenant, is the *CLIENT_ID*, *SECRET*, *DOMAIN*. Flask needs these set-up as environment variables. Execute the following
 
 ```commandline
 export AUTH0_CLIENT_ID=<YOUR_CLIENT_ID>
@@ -152,7 +164,7 @@ If you restart the application with `flask run`, the sign-up, log-in and log-out
 
 ### Step 10 - (Optional) Set-up Google analytics
 
-If you have a web-domain and wish to use [Google Analytics](https://analytics.google.com/) for this Flask apo, then you will need to register with google. Follow their guidance here.
+If you have a web-domain and wish to use [Google Analytics](https://analytics.google.com/) for this Flask app, then you will need to register with Google. Follow the guidance on the [Google Analytics](https://analytics.google.com/) site.
 
 Once you've done this, set-up the relevant environment variable
 
@@ -174,16 +186,25 @@ export S3_BUCKET=<NAME_OF_BUCKET
 If you'd like to use a CDN to serve the static content then register and set-this up. Once you have the URL for the CDN then you need to let Flask know.
 
 ```commandline
-export CDN_DOMAIN-<YOUR_CDN_DOMAIN>
+export CDN_DOMAIN=<YOUR_CDN_DOMAIN>
 ```
 
+You will need to ensure all of the content (files and subfolders) inside the `static` folder is deployed to your CDN so it is accessible as `https://<YOUR_CDN_DOMAIN/static/...`
+
 ### Finally
-If you've followed the previous steps then you will have a fully running Flask instance
+If you've followed the previous steps then you will have a fully running Flask instance demonstrating some essential features. 
+* The Flask app will be using Auth0 to manage user authentication and sign-ups. 
+* It will serve the static content from the CDN so end users get better page load times.
+* Google Analytics will be tracking usage of your site so you can start to see visitor numbers, pages accessed etc.
+* You're all set for customer engagement via the Contact Us page.
+* It is a PWA so can easily be used and installed on mobile devices without requiring the relevant app store 
+* Basic, compliance type features are readily available which you can customize for your own use.
 
 ## Run via Docker
-Or you can use the [Dockerfile](Dockerfile) and [docker-compose file](docker-compose.yml) to launch the Flask app in a container connected to MySQl running in a container. 
 
-Make sure Docker is running locally and then enter:
+You can use the [Dockerfile](Dockerfile) and [docker-compose file](docker-compose.yml) to launch the Flask app in a container connected to MySQl running in a container. 
+
+Make sure Docker is installed and running locally and then enter:
 
 ```commandline
 docker-compose build
@@ -195,7 +216,9 @@ followed by
 docker-compose up
 ```
 
-Follow the instructions in the previous section for setting up Auth0, Google Analytics, AWs S3 bucket and your CDN. The environment variables will need to be set-up locally as well as the docker-compose command passes the local environment variables to the container.
+Follow the instructions in the previous section for setting up Auth0, Google Analytics, AWS S3 bucket and your CDN. 
+
+The environment variables will need to be set-up locally within your shell as the docker-compose command passes the local environment variables to the container. See [docker-compose](docker-compose.yml).
 
 ## Running in the cloud
 
@@ -208,39 +231,62 @@ This application will readily run in AWS and, as a bonus, on the free tier. I've
 
 CircleCI is used to automatically deploy the application to Elastic Beanstalk and the static files to S3.
 
-[Running on AWS](docs/runonaws.md) describes the AWS set-up required to run the Flask app on the AWS Elastic Beanstalk PaaS.
+[Running on AWS](https://github.com/greendinosaur/flask-aws-template/wiki/Running-the-Flask-app-on-AWS) describes the AWS set-up required to run the Flask app on the AWS Elastic Beanstalk PaaS.
+
+It can be deployed to other cloud providers as it is a simple Flask app. 
 
 ## Tests and CI/CD
 
 ### Tests
-The [tests](app/tests) folder contains all of the application tests.
+The [tests](app/tests) folder contains all of the application tests. These use the pytest framework. They test the database, views, business logic and the UI.
+
 Selenium is used in headless mode to test the UI. [Chromedriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) will need to be installed.
 
-To run the tests execute `Make test` on the command line.
-You can also run various linters by entering `Make lint`. These will provide some errors due to the way Flask works.
+Prior to running the tests, you will need to ensure the `TEST_DATABASE_URL` environment variable is set. You could either test against a simple sqllite database in which case set the variable as follows
+
+```commandline
+export TEST_DATABASE_URL=sqlite:///test_app.db
+```
+
+or if you have a MySQL or other database available then enter
+
+```commandline
+export TEST_DATABASE_URL=<connection string>
+```
+
+or if you run `docker-compose up --build` to run the app then you can connect to the mysql database server running in the container as
+
+```commandline
+export TEST_DATABASE_URL=mysql+pymysql://root:hello@localhost:3308/test?charset=utf8mb4
+```
+
+To run the tests execute `Make test` on the command line. 
+
+The [Lighthouse](https://developers.google.com/web/tools/lighthouse/) component of Google Chrome Dev Tools has been heavily used to ensure the application is SEO ready and fully PWA compliant.
 
 ### CI/CD
 
 I've leveraged [CircleCI](https://circleci.com) for Continuous Integration and Continuous Deployment. Tests are automatically run the against a MySQL database. Builds on master are automatically deployed when all tests pass successfully. 
 
-Check out the [config file](.circleci/config.yml) and the [CircleCI overview](docs/cicdwithcircleci.md) for further details on using CircleCI.
+Check out the [config file](.circleci/config.yml) and the [CircleCI overview](https://github.com/greendinosaur/flask-aws-template/wiki/Running-the-Flask-app-on-AWS) for further details on using CircleCI.
 
-I've also used [SonarCloud](https://sonarcloud.io) to highlight code coverage and code quality issues.
+## Further information
 
-[Snyk](https://snyk.io) is used to scan the requirements.txt file for potential vulnerabilities.
+Take a look at the project [wiki](https://github.com/greendinosaur/flask-aws-template/wiki) for further guidance on using this template as a starting point for your own Flask based applications.
 
-## How to use?
+## How to customize?
+
 Take this code as is and alter to better suit your needs.
 * You can add new imagery and styles. Alter the files in the [static](app/static) folder
 * Change the [templates](app/templates)
 * Change the [code](app) 
-* update the meta data in the [base template](app/templates/base.html) to better support your site
+* Update the meta data in the [base template](app/templates/base.html) to better support your site
 
 ## Contribute
 Feedback and contributions are welcome. Checkout the [code of conduct](CODE_OF_CONDUCT.md) and [contributor guidelines](CONTRIBUTING.md).
 
 ## To dos
-* The [issue tracker](https://github.com/greendinosaur/flask-aws-template/issues) contains the proposed enhancements and bug fixes.
+* The [issue tracker](issues) contains the proposed enhancements and bug fixes.
 
 # License
 This is licensed under a MIT licence.
