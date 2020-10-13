@@ -48,6 +48,7 @@ This app contains the following features:
 * Use of Bootstrap and FontAwesome to produce a fully responsive, good-looking website.
 * A homepage and navbar built from Bootstrap
 * Static pages required by many sites (FAQ, disclaimer, cookie policy, privacy policy)
+* Displays a use of cookies banner that must be clicked to acknowledge the use of cookies
 * Contact Us page showcasing how to use AWS S3 to store the user submitted data
 * Sign-up/Log-in/Log-out using Auth0 as the authentication provider
 * A fully responsive PWA application that runs as well on the desktop as it does on a mobile device
