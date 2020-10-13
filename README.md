@@ -151,13 +151,13 @@ Open up a browser to [http://localhost:5000](http://localhost:5000). Click aroun
 ### Step 9 - (Optional) Set-up user authentication
 The app uses [Auth0](https://auth0.com/) as its user authentication provider. You need to register for a free account with Auth0. Follow the guidance here to not only set-up your free account but also configure your tenant.
 
-The document [Authentication](docs/authentication.md) describes the Auth0 setup in further details along with an explanation of how the app has been coded to use Auth0.
+The wiki article [Authentication](https://github.com/greendinosaur/flask-aws-template/wiki/Authentication) describes the Auth0 setup in further details along with an explanation of how the app has been coded to use Auth0.
 
 The important data required, once you have registered and have a tenant, is the *CLIENT_ID*, *SECRET*, *DOMAIN*. Flask needs these set-up as environment variables. Execute the following
 
 ```commandline
 export AUTH0_CLIENT_ID=<YOUR_CLIENT_ID>
-export AUTH0_SECRET_ID=<YOUR_SECRET_ID>
+export AUTH0_CLIENT_SECRET=<YOUR_CLIENT_SECRET>
 export AUTH0_CLIENT_DOMAIN=<YOUR_DOMAIN>
 ```
 If you restart the application with `flask run`, the sign-up, log-in and log-out links will now work.
@@ -174,7 +174,7 @@ export GA_CODE=<YOUR_GOOGLE_TAG>
 
 ### Step 11 - (Optional) Set-up an AWS S3 bucket to store feedback from the Contact Us page
 
-To fully use the contact-us page, you will need an AWS S3 bucket. Once you have one then set-up the following environment variables:
+To fully use the contact-us page, you will need an AWS S3 bucket. Once you have one set-up, the following environment variables:
 
 ```commandline
 export CONTACT_US_FORMAT=S3
