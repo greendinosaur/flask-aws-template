@@ -1,6 +1,8 @@
-from flask import render_template, current_app
-from app.errors import bp
+from flask import render_template, current_app, Blueprint
+
 from app import db
+
+bp = Blueprint('errors', __name__)
 
 
 @bp.app_errorhandler(403)

@@ -1,12 +1,16 @@
+import os
 from urllib.parse import urlencode
 
+from flask import Blueprint
 from flask import render_template, flash, redirect, url_for, current_app
 from flask_login import current_user, login_user, logout_user
 
-from app import db, oauth
-from app.auth import bp
+from app.db import db, oauth
+
 from app.auth.forms import LoginForm
 from app.models import User
+
+bp = Blueprint('auth', __name__)
 
 INDEX_PAGE = 'main.index'
 
@@ -40,6 +44,13 @@ def logout():
     """
     logout_user()
     return redirect(url_for(INDEX_PAGE))
+
+
+if os.getenv('FLASK_CONFIG') in ['development', 'testing']:
+    # add in some simple forms to allow testing without using Auth0 for authentication
+    # assumes there is already a test user inside the database that can be used
+    bp.add_url_rule('/login', 'login', login, methods=['GET', 'POST'])
+    bp.add_url_rule('/logout', 'logout', logout)
 
 
 @bp.route('/sign-up', methods=['GET', 'POST'])
@@ -89,7 +100,7 @@ def oauth_callback():
         return redirect(url_for('index'))
 
     # token is required for authentication
-    token = oauth.auth0.authorize_access_token()
+    _ = oauth.auth0.authorize_access_token()
     resp = oauth.auth0.get('userinfo')
     user_info = resp.json()
 

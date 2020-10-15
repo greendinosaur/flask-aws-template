@@ -2,27 +2,27 @@ import logging
 from logging import config
 
 import yaml
-from authlib.integrations.flask_client import OAuth
+
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_cdn import CDN
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_moment import Moment
-from flask_sqlalchemy import SQLAlchemy
 from flask_wtf.csrf import CSRFProtect
 
 from app.services import utils
+from app.db import db, oauth
+
 from config import app_config
 
-db = SQLAlchemy()
 migrate = Migrate()
 login = LoginManager()
 login.login_view = 'main.welcome'
 bootstrap = Bootstrap()
 moment = Moment()
 csrf = CSRFProtect()
-oauth = OAuth()
+
 cdn = CDN()
 
 
@@ -66,16 +66,22 @@ def create_app(config_name='default'):
         },
     )
 
-    from app.errors import bp as errors_bp
+    from app.errors.handlers import bp as errors_bp
+    from app.auth.routes import bp as auth_bp
+    from app.main.routes import bp as main_bp
+    from app.support.legal_routes import bp as support_bp
     app.register_blueprint(errors_bp)
-    from app.auth import bp as auth_bp
     app.register_blueprint(auth_bp, url_prefix='/auth')
-    from app.main import bp as main_bp
     app.register_blueprint(main_bp)
-    from app.support import bp as support_bp
     app.register_blueprint(support_bp, url_prefix='/support')
 
     # this filter allows environment variables to be read inside the jinja templates
     app.jinja_env.filters['get_os_env'] = utils.get_os_env
+
+    from app.models import User
+
+    @login.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
 
     return app

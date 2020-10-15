@@ -1,11 +1,13 @@
 from datetime import datetime
 
+from flask import Blueprint
 from flask import render_template, url_for, current_app, send_from_directory, request
 from flask_login import current_user, login_required
 
-from app import db
-from app.main import bp
 from app.models import User
+from app import db
+
+bp = Blueprint('main', __name__)
 
 
 @bp.before_request
