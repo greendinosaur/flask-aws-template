@@ -18,6 +18,7 @@ def test_contact_us_logged_in_user(test_client_csrf, init_database):
     with patch('flask_login.utils._get_user') as current_user:
         current_user.return_value.id = u.id
         current_user.return_value.get_id.return_value = u.id
+        current_user.return_value.is_authenticated.return_value = True
         params = dict(
             name="Bobby Chariot",
             email="bobby@chariot.email",
